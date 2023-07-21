@@ -13,6 +13,7 @@
 		559210452A6A5B3700E403C5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 559210432A6A5B3700E403C5 /* Main.storyboard */; };
 		559210472A6A5B3900E403C5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 559210462A6A5B3900E403C5 /* Assets.xcassets */; };
 		5592104A2A6A5B3900E403C5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 559210482A6A5B3900E403C5 /* LaunchScreen.storyboard */; };
+		559210522A6A620A00E403C5 /* NewlyCoinedWords.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559210512A6A620A00E403C5 /* NewlyCoinedWords.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		559210462A6A5B3900E403C5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		559210492A6A5B3900E403C5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5592104B2A6A5B3900E403C5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		559210512A6A620A00E403C5 /* NewlyCoinedWords.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewlyCoinedWords.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +60,7 @@
 			children = (
 				5592103D2A6A5B3700E403C5 /* AppDelegate.swift */,
 				5592103F2A6A5B3700E403C5 /* SceneDelegate.swift */,
+				559210512A6A620A00E403C5 /* NewlyCoinedWords.swift */,
 				559210412A6A5B3700E403C5 /* ViewController.swift */,
 				559210432A6A5B3700E403C5 /* Main.storyboard */,
 				559210462A6A5B3900E403C5 /* Assets.xcassets */,
@@ -83,6 +86,8 @@
 			dependencies = (
 			);
 			name = "Newly-Coined-Word";
+			packageProductDependencies = (
+			);
 			productName = "Newly-Coined-Word";
 			productReference = 5592103A2A6A5B3700E403C5 /* Newly-Coined-Word.app */;
 			productType = "com.apple.product-type.application";
@@ -111,6 +116,8 @@
 				Base,
 			);
 			mainGroup = 559210312A6A5B3700E403C5;
+			packageReferences = (
+			);
 			productRefGroup = 5592103B2A6A5B3700E403C5 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -139,6 +146,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				559210422A6A5B3700E403C5 /* ViewController.swift in Sources */,
+				559210522A6A620A00E403C5 /* NewlyCoinedWords.swift in Sources */,
 				5592103E2A6A5B3700E403C5 /* AppDelegate.swift in Sources */,
 				559210402A6A5B3700E403C5 /* SceneDelegate.swift in Sources */,
 			);

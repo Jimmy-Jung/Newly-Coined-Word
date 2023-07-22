@@ -8,7 +8,7 @@
 import UIKit
 
 class ViewController: UIViewController {
-    
+    // MARK: - IBOutLet
     @IBOutlet weak var searchBackgroundView: UIView!
     @IBOutlet weak var searchTextField: UITextField!
     @IBOutlet weak var searchButton: UIButton!
@@ -17,17 +17,19 @@ class ViewController: UIViewController {
     @IBOutlet weak var resultBackgroundView: UIView!
     @IBOutlet weak var resultTextLabel: UILabel!
     @IBOutlet weak var resultViewButtonConstraint: NSLayoutConstraint! // 신조어 결과 뷰 높이
+    // MARK: - Private Properties
     private var ncwDic: [String: String] = [:] // 신조어 딕셔너리
     
     // MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        searchTextField.delegate = self
-        searchTextField.becomeFirstResponder()
         ncwDic = NewlyCoinedWords().parseJSON()
         configUI()
         keyboardNotification()
     }
+    
+    // MARK: - IBAction
+    
     ///  뷰 터치시 키보드 내리기
     @IBAction func viewTapped(_ sender: UITapGestureRecognizer) {
         view.endEditing(true)
@@ -40,6 +42,7 @@ class ViewController: UIViewController {
         resultTextLabel.text = result
     }
     
+    // MARK: - Private Methods
     /// UI 구성
     private func configUI() {
         configSearchBar()
@@ -49,12 +52,26 @@ class ViewController: UIViewController {
     
     /// 검색창 구성
     private func configSearchBar() {
+        // 텍스트 필드
+        searchTextField.delegate = self
+        searchTextField.becomeFirstResponder()
         // 검색창
         searchBackgroundView.layer.cornerRadius = 10
         searchBackgroundView.layer.borderWidth = 3
         searchBackgroundView.layer.borderColor = UIColor.black.cgColor
         searchBackgroundView.clipsToBounds = true
-
+    }
+    
+    /// 신조어 표시 뷰 구성
+    private func configResultView() {
+        // 결과 배경뷰
+        resultBackgroundView.layer.borderWidth = 3
+        resultBackgroundView.layer.borderColor = UIColor.black.cgColor
+        // 결과뷰 윗부분
+        resultUpperView.layer.borderWidth = 3
+        resultUpperView.layer.borderColor = UIColor.black.cgColor
+        // 결과 레이블
+        resultTextLabel.font = UIFont.BeminFont(font: .BMHANNA_11yrs_ttf, fontSize: 18)
     }
     
     /// 스크롤뷰 구성
@@ -98,14 +115,6 @@ class ViewController: UIViewController {
         return button
     }
     
-    /// 신조어 표시 뷰 구성
-    private func configResultView() {
-        resultBackgroundView.layer.borderWidth = 3
-        resultBackgroundView.layer.borderColor = UIColor.black.cgColor
-        resultUpperView.layer.borderWidth = 3
-        resultUpperView.layer.borderColor = UIColor.black.cgColor
-    }
-    
     /// 키보드 노티피케이션 등록
     private func keyboardNotification() {
         // 키보드 올라올 때 알림 등록
@@ -124,11 +133,12 @@ class ViewController: UIViewController {
         )
     }
     
+    // MARK: - @objc Method
     /// 키보드 올라갈때 호출 메서드
     @objc func keyboardWillShow(_ notification: Notification) {
         guard let keyboardFrame = notification
             .userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else { return }
-
+        
         // 신조어 화면 높이 조정 및애니메이션 추가
         UIView.animate(withDuration: notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? TimeInterval ?? 0.25) {
             self.resultViewButtonConstraint.constant = keyboardFrame.height
@@ -148,29 +158,36 @@ class ViewController: UIViewController {
     /// 신조어 버튼 선택시 호출
     /// - Parameter sender: 신조어 버튼
     @objc func keywordButtonTapped(_ sender: UIButton) {
+        UIView.animate(withDuration: 0.2) {
+            sender.backgroundColor = .systemGray6
+            sender.layer.borderColor = UIColor.darkGray.cgColor
+        }
+        UIView.animate(withDuration: 0.2) {
+            sender.backgroundColor = .systemGray5
+            sender.layer.borderColor = UIColor.black.cgColor
+        }
+        
         guard let value = sender.titleLabel?.text else {return}
         searchTextField.text = value
         let text = ncwDic[value] ?? "신조어가 없습니다."
         resultTextLabel.text = text
     }
-    
+    // MARK: - Deinitializer
     // 메모리 해제시 옵저버 메모리에서 제거
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
 }
 
-
+// MARK: - TextFieldDelegate
 extension ViewController: UITextFieldDelegate {
     /// 텍스트필드 리턴시 호출
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         guard let value = textField.text else { return true}
         let text = ncwDic[value] ?? "신조어가 없습니다."
         resultTextLabel.text = text
-        
         // 키보드 내리기
         textField.resignFirstResponder()
         return true
     }
-    
 }

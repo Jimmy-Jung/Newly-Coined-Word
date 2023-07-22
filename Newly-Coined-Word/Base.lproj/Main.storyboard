@@ -185,18 +185,18 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oc0-nJ-hfw">
-                                <rect key="frame" x="0.0" y="0.0" width="393" height="155"/>
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="158"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EL3-3v-knk">
                                         <rect key="frame" x="16" y="103" width="361" height="40"/>
                                         <subviews>
-                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="포케?돈까스?커리?" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5q7-tW-uvM">
+                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="포케?돈까스?커리?" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5q7-tW-uvM">
                                                 <rect key="frame" x="40" y="0.0" width="321" height="40"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
-                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UXR-81-93x">
-                                                <rect key="frame" x="0.0" y="3" width="40" height="35"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UXR-81-93x">
+                                                <rect key="frame" x="0.0" y="3" width="40" height="34.333333333333336"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="40" id="txp-gr-u3a"/>
                                                 </constraints>
@@ -211,6 +211,7 @@
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="5q7-tW-uvM" secondAttribute="trailing" id="3a5-IT-ESP"/>
                                             <constraint firstAttribute="height" constant="40" id="Bgr-5F-QyW"/>
+                                            <constraint firstItem="UXR-81-93x" firstAttribute="centerY" secondItem="EL3-3v-knk" secondAttribute="centerY" id="HgE-fz-GQE"/>
                                             <constraint firstItem="5q7-tW-uvM" firstAttribute="top" secondItem="EL3-3v-knk" secondAttribute="top" id="aBG-OR-a70"/>
                                             <constraint firstAttribute="bottom" secondItem="5q7-tW-uvM" secondAttribute="bottom" id="d16-8L-4s7"/>
                                             <constraint firstItem="5q7-tW-uvM" firstAttribute="top" secondItem="EL3-3v-knk" secondAttribute="top" id="kdF-DR-ibV"/>
@@ -263,7 +264,7 @@
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemMintColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="EL3-3v-knk" secondAttribute="bottom" constant="12" id="Adp-tr-ecX"/>
+                                    <constraint firstAttribute="bottom" secondItem="EL3-3v-knk" secondAttribute="bottom" constant="15" id="Adp-tr-ecX"/>
                                     <constraint firstAttribute="trailing" secondItem="EL3-3v-knk" secondAttribute="trailing" constant="16" id="I7R-C1-TPb"/>
                                     <constraint firstItem="EL3-3v-knk" firstAttribute="top" secondItem="oc0-nJ-hfw" secondAttribute="top" constant="103" id="L2S-yj-UPr"/>
                                     <constraint firstItem="EL3-3v-knk" firstAttribute="top" secondItem="ean-Og-0Yn" secondAttribute="bottom" constant="8" id="eNI-6b-aPL"/>
@@ -271,6 +272,12 @@
                                     <constraint firstAttribute="trailing" secondItem="ean-Og-0Yn" secondAttribute="trailing" constant="16" id="ofb-rR-DXK"/>
                                     <constraint firstItem="EL3-3v-knk" firstAttribute="leading" secondItem="oc0-nJ-hfw" secondAttribute="leading" constant="16" id="w3K-54-iUm"/>
                                 </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="15"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="clipsToBounds" value="YES"/>
+                                </userDefinedRuntimeAttributes>
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Ymq-kO-az4"/>

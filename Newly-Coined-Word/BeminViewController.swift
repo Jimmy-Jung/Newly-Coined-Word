@@ -11,6 +11,7 @@ class BeminViewController: UIViewController{
 
     @IBOutlet var imageView: [UIImageView]!
     
+    @IBOutlet weak var imageStackView: UIStackView!
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -23,6 +24,12 @@ class BeminViewController: UIViewController{
             image.addGestureRecognizer(tapGesture)
             image.isUserInteractionEnabled = true
         }
+        
+        if UIScreen.main.bounds.height <= 667 {
+            // 아이폰 8의 높이 이하에서만 작동하는 기능을 추가합니다
+            imageStackView.isHidden = true
+        }
+
         
         
     }

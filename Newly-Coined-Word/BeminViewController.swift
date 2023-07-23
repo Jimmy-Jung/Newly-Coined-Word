@@ -7,12 +7,49 @@
 
 import UIKit
 
-class BeminViewController: UIViewController {
+class BeminViewController: UIViewController{
 
+    @IBOutlet var imageView: [UIImageView]!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let tapGesture = UITapGestureRecognizer(
+            target: self,
+            action: #selector(imageTap(_:))
+        )
+        
+        imageView.forEach { image in
+            image.addGestureRecognizer(tapGesture)
+            image.isUserInteractionEnabled = true
+        }
+        
+        
+    }
+    @objc func imageTap(_ sender: UITapGestureRecognizer) {
+        print("tapped")
+        guard let tappedImageView = sender.view as? UIImageView else {return}
+        UIView.animate(withDuration: 0.3) {
+            tappedImageView.alpha = 0.5
+        }
+        UIView.animate(withDuration: 0.3) {
+            tappedImageView.alpha = 1
+        }
+    }
+    
+    @IBAction func viewTapped(_ sender: UITapGestureRecognizer) {
+        view.endEditing(true)
+    }
+    
 
-        // Do any additional setup after loading the view.
+    
+    @IBAction func topButtonTapped(_ sender: UIButton) {
+        UIView.animate(withDuration: 0.3) {
+            sender.tintColor = .black
+        }
+        UIView.animate(withDuration: 0.3) {
+            sender.tintColor = .white
+        }
     }
     
 

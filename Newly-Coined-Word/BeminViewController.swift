@@ -15,12 +15,13 @@ class BeminViewController: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let tapGesture = UITapGestureRecognizer(
-            target: self,
-            action: #selector(imageTap(_:))
-        )
+        
         
         imageView.forEach { image in
+            let tapGesture = UITapGestureRecognizer(
+                target: self,
+                action: #selector(imageTap(_:))
+            )
             image.addGestureRecognizer(tapGesture)
             image.isUserInteractionEnabled = true
         }

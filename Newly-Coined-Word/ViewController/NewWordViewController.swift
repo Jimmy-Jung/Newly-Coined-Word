@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class NewWordViewController: UIViewController {
     // MARK: - IBOutLet
     @IBOutlet weak var searchBackgroundView: UIView!
     @IBOutlet weak var searchTextField: UITextField!
@@ -17,16 +17,19 @@ class ViewController: UIViewController {
     @IBOutlet weak var resultBackgroundView: UIView!
     @IBOutlet weak var resultTextLabel: UILabel!
     @IBOutlet weak var resultViewButtonConstraint: NSLayoutConstraint! // 신조어 결과 뷰 높이
+    
     // MARK: - Private Properties
     private var ncwDic: [String: String] = [:] // 신조어 딕셔너리
+    private let NW = DV.NewWord.self // Default String
     
     // MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        ncwDic = CoinedWordJSONParser().parseJSON()
+        getDicData()
         configUI()
         keyboardNotification()
     }
+
     
     // MARK: - IBAction
     
@@ -37,12 +40,29 @@ class ViewController: UIViewController {
     
     /// 검색 버튼 선택시 호출
     @IBAction func searchButtonTapped(_ sender: UIButton) {
-        guard let text = searchTextField.text else { return }
-        let result = ncwDic[text] ?? " 신조어가 없습니다."
+        guard let text = searchTextField.text, !text.isEmpty else {
+            self.showCancelAlert(
+                title: NW.alertTitle,
+                message: nil,
+                preferredStyle: .alert
+            )
+            return
+        }
+        let result = ncwDic[text] ?? NW.resultLabelText
         resultTextLabel.text = result
+        searchTextField.resignFirstResponder()
     }
     
     // MARK: - Private Methods
+    /// JSONParse
+    private func getDicData() {
+        switch JSONParser().getDicData() {
+        case .success(let dic):
+            self.ncwDic = dic
+        case .failure(let error):
+            print(error.localizedDescription)
+        }
+    }
     /// UI 구성
     private func configUI() {
         configSearchBar()
@@ -169,7 +189,7 @@ class ViewController: UIViewController {
         
         guard let value = sender.titleLabel?.text else {return}
         searchTextField.text = value
-        let text = ncwDic[value] ?? "신조어가 없습니다."
+        let text = ncwDic[value] ?? NW.resultLabelText
         resultTextLabel.text = text
     }
     // MARK: - Deinitializer
@@ -180,14 +200,23 @@ class ViewController: UIViewController {
 }
 
 // MARK: - TextFieldDelegate
-extension ViewController: UITextFieldDelegate {
+extension NewWordViewController: UITextFieldDelegate {
     /// 텍스트필드 리턴시 호출
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        guard let value = textField.text else { return true}
-        let text = ncwDic[value] ?? "신조어가 없습니다."
-        resultTextLabel.text = text
+        guard let text = textField.text, !text.isEmpty else {
+            self.showCancelAlert(
+                title: NW.alertTitle,
+                message: nil,
+                preferredStyle: .alert
+            )
+            return true
+        }
+        let resultText = ncwDic[text] ?? NW.resultLabelText
+        resultTextLabel.text = resultText
         // 키보드 내리기
         textField.resignFirstResponder()
         return true
     }
 }
+
+

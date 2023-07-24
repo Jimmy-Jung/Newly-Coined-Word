@@ -23,7 +23,7 @@ class ViewController: UIViewController {
     // MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        ncwDic = NewlyCoinedWords().parseJSON()
+        ncwDic = CoinedWordJSONParser().parseJSON()
         configUI()
         keyboardNotification()
     }

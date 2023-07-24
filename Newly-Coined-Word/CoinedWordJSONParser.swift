@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct NewlyCoinedWords {
+struct CoinedWordJSONParser {
     let jsonString = """
     {
         "눈치게임": "눈치를 보며 상황을 파악하는 게임",
